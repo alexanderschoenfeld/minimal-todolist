@@ -105,14 +105,30 @@ In **package.json** Startskript ergänzen:
 
 ```js
 // server.js
+const fse = require("fs-extra");
+const DB_FILE = "./todos.json";
+
+// Laden beim Start
+async function load() {
+  try { return await fse.readJson(DB_FILE); } catch { return []; }
+}
+async function save(arr) {
+  await fse.writeJson(DB_FILE, arr, { spaces: 2 });
+}
+
+(async () => {
+  todos = await load();
+  nextId = todos.reduce((m, t) => Math.max(m, t.id), 0) + 1;
+})();
+// server.js
 const express = require("express");
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("public")); // Frontend bereitstellen
 
-let todos = [];
+let todos = []; // { id:number, text:string, done:boolean }
 let nextId = 1;
 
 app.get("/api/todos", (req, res) => {
@@ -124,6 +140,7 @@ app.post("/api/todos", (req, res) => {
   if (!text) return res.status(400).json({ error: "text is required" });
   const todo = { id: nextId++, text, done: false };
   todos.push(todo);
+  save(todos);
   res.status(201).json(todo);
 });
 
@@ -137,6 +154,7 @@ app.patch("/api/todos/:id", (req, res) => {
     const t = req.body.text.trim();
     if (t) todo.text = t;
   }
+  save(todos);
   res.json(todo);
 });
 
@@ -144,6 +162,7 @@ app.delete("/api/todos/:id", (req, res) => {
   const id = Number(req.params.id);
   const before = todos.length;
   todos = todos.filter(t => t.id !== id);
+  save(todos);
   if (todos.length === before) return res.status(404).json({ error: "not found" });
   res.status(204).end();
 });
@@ -198,26 +217,72 @@ Minimaler Aufbau + sehr simples Styling.
 Plain Fetch + DOM, keine Frameworks.
 
 ```js
-// Beispiel: Aufgaben im Local Storage speichern
-function saveTodosToLocalStorage(todos) {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
+// Minimal-Todo-App: Speicher-Varianten
+// -------------------------------------
+// 1. Standard: Nur Memory (Array todos)
+// 2. Local Storage: Auskommentiert, kann aktiviert werden
+// 3. API/Datei: Auskommentiert, kann aktiviert werden
 
-function loadTodosFromLocalStorage() {
-  const todos = localStorage.getItem('todos');
-  return todos ? JSON.parse(todos) : [];
-}
+// ---- 1. Nur Memory ----
+let todos = [];
 
-const API = "/api/todos";
+// //---- 2. Local Storage Functions ----
+// // Funktion zum Speichern im Local Storage
+// function saveTodosToLocalStorage(todos) {
+//   localStorage.setItem('todos', JSON.stringify(todos));
+// }
+// // Funktion zum Laden aus Local Storage
+// function loadTodosFromLocalStorage() {
+//   const todos = localStorage.getItem('todos');
+//   return todos ? JSON.parse(todos) : [];
+// }
+
+
+// //---- 3. API/Datei Functions----
+// // API-Endpunkt für die Todo-Liste
+// const API = "/api/todos";
+// async function fetchTodosFromApi() {
+//   const res = await fetch(API);
+//   const data = await res.json();
+//   todos = data;
+//   render(todos);
+// }
+// // Schritt 3 API-Funktionen für POST, PATCH, DELETE
+// async function addTodoApi(text) {
+//   await fetch(API, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ text })
+//   });
+//   fetchTodosFromApi();
+// }
+// async function updateTodoApi(id, text) {
+//   await fetch(`${API}/${id}`, {
+//     method: "PATCH",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ text })
+//   });
+//   fetchTodosFromApi();
+// }
+// async function toggleDoneApi(id, done) {
+//   await fetch(`${API}/${id}`, {
+//     method: "PATCH",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ done })
+//   });
+//   fetchTodosFromApi();
+// }
+// async function delTodoApi(id) {
+//   await fetch(`${API}/${id}`, {
+//     method: "DELETE"
+//   });
+//   fetchTodosFromApi();
+// }
+
+
 const listEl = document.querySelector("#list");
 const formEl = document.querySelector("#createForm");
 const inputEl = document.querySelector("#todoInput");
-
-async function fetchTodos() {
-  const res = await fetch(API);
-  const data = await res.json();
-  render(data);
-}
 
 function render(todos) {
   listEl.innerHTML = "";
@@ -239,7 +304,7 @@ function render(todos) {
     editBtn.className = "ghost";
     editBtn.addEventListener("click", async () => {
       const neu = prompt("Neuer Text:", t.text);
-      if (neu && neu.trim()) await updateText(t.id, neu.trim());
+      if (neu && neu.trim()) updateText(t.id, neu.trim());
     });
 
     const delBtn = document.createElement("button");
@@ -251,43 +316,74 @@ function render(todos) {
   });
 }
 
-formEl.addEventListener("submit", async (e) => {
+formEl.addEventListener("submit", (e) => {
   e.preventDefault();
   const text = inputEl.value.trim();
   if (!text) return;
-  await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text })
-  });
+  todos.push({ id: Date.now(), text, done: false });
   inputEl.value = "";
-  fetchTodos();
+
+  // // Schritt 2: aktivieren für Local Storage
+  // saveTodosToLocalStorage(todos); 
+
+  // // Schritt 3: API-Aufruf für POST
+  // addTodoApi(text);
+  
+  
+  render(todos);
 });
 
-async function toggleDone(id, done) {
-  await fetch(`${API}/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ done })
-  });
-  fetchTodos();
+function toggleDone(id, done) {
+  const todo = todos.find(t => t.id === id);
+  if (todo) todo.done = done;
+
+//   //Schritt 2: aktivieren für Local Storage
+//   saveTodosToLocalStorage(todos);
+
+// // Schritt 3: API-Aufruf für PATCH
+//   toggleDoneApi(id, done);
+  
+  
+  render(todos);
 }
 
-async function updateText(id, text) {
-  await fetch(`${API}/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text })
-  });
-  fetchTodos();
+function updateText(id, text) {
+  const todo = todos.find(t => t.id === id);
+  if (todo) todo.text = text;
+  
+  // //Schritt 2: aktivieren für Local Storage
+  // saveTodosToLocalStorage(todos);
+
+  // //Schritt 3: API-Aufruf für PATCH
+  // updateTodoApi(id, text);
+  
+  
+  render(todos);
 }
 
-async function delTodo(id) {
-  await fetch(`${API}/${id}`, { method: "DELETE" });
-  fetchTodos();
+function delTodo(id) {
+  todos = todos.filter(t => t.id !== id);
+
+  // // Schritt 2: aktivieren für Local Storage
+  // saveTodosToLocalStorage(todos); 
+  
+  // // Schritt 3: API-Aufruf für DELETE
+  // delTodoApi(id);
+
+
+  render(todos);
 }
 
-let todos = loadTodosFromLocalStorage();
+
+
+// // Schritt 2: Local Storage aktivieren
+// todos = loadTodosFromLocalStorage();
+
+// // Schritt 3: API aktivieren
+// fetchTodosFromApi();
+
+
+// Schritt 1: Nur Memory
 render(todos);
 ```
 
