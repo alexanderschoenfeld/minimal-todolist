@@ -9,7 +9,20 @@
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
-In dieser Übung erstellen wir eine minimalistische Todo-App mit Node.js und Express. Schritt für Schritt lernst du, wie du ein neues Projekt aufsetzt, die grundlegende Backend-Logik entwickelst und ein einfaches Frontend implementierst. Ziel ist es, Aufgaben zu erfassen, zu bearbeiten und zu verwalten – ideal für den Einstieg in die Webentwicklung mit JavaScript. 
+In dieser Übung erstellen wir eine minimalistische Todo-App mit Node.js und Express. 
+
+Schritt für Schritt lernst du, wie du ein neues Projekt aufsetzt, die grundlegende Backend-Logik entwickelst und ein einfaches Frontend implementierst. 
+
+Ziel ist es, Todos zu speichern, zu bearbeiten und zu löschen – ideal für den Einstieg in die Webentwicklung mit JavaScript. 
+
+Der Code enthält bereits drei Varianten, wie die eingegebenen Todos gespeichert werden. 
+
+**Ziel:** Wir sehen, wie dynamisch Daten (die Todos) am Frontend abgerufen werden können und gespeichert werden, ... 
+- im *"runtime Memory"* des Browsers
+- im *lokalen Speicer (local storage)* 
+- in einer Datei, *die im Backend des Servers* liegt.
+
+Aber zuerst bauen wir alles zusammen und laden die nötigen Libraries herunter.
 
 ---
 
@@ -417,7 +430,7 @@ Du lernst, wie die Aufgaben (Todos) in drei Varianten gespeichert werden können
 2. Im Local Storage des Browsers
 3. Im Backend (Datei/Server, über die API)
 
-Alle Varianten sind im Code von `public/app.js` bereits vorbereitet und auskommentiert. Du aktivierst sie Schritt für Schritt, indem du die entsprechenden Zeilen einkommentierst.
+Alle Varianten sind im Code von `public/app.js` bereits vorbereitet und *auskommentiert*. Du aktivierst sie Schritt für Schritt, indem du die entsprechenden Zeilen wieder *einkommentierst*.
 
 ---
 
