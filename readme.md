@@ -69,7 +69,7 @@ Hier wird Schritt für Schritt erklärt, wie du das Projekt bis Punkt 5 anlegst.
 mkdir todo-minimal
 cd todo-minimal
 npm init -y
-npm install express
+npm install express fs-extra
 mkdir public
 ```
 
