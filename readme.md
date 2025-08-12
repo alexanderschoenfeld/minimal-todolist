@@ -1,14 +1,3 @@
-# Minimal-Todo-App: Übersicht & Navigation
-
-<p align="center">
-  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
-  <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
-</p>
-
----
 
 # Minimal-Todo-App: Übersicht & Navigation
 
