@@ -5,7 +5,7 @@
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
 ---
@@ -17,7 +17,7 @@
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
 Willkommen zum Minimal-Todo-Projekt! Diese Anleitung ist für Anfänger gedacht und führt dich Schritt für Schritt durch die wichtigsten Themen. Nutze die Navigation oben, um direkt zu den gewünschten Abschnitten zu springen.
@@ -92,7 +92,7 @@ npm -v
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
 Hier wird Schritt für Schritt erklärt, wie du das Projekt bis Punkt 5 anlegst.
@@ -339,7 +339,7 @@ npm start
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
 Hier lernst du, wie du die Aufgaben im Local Storage des Browsers speicherst.
@@ -367,7 +367,7 @@ function loadTodosFromLocalStorage() {
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
 Hier wird gezeigt, wie die Aufgaben serverseitig in einer Datei gespeichert werden (Punkt 7).
@@ -410,7 +410,7 @@ save(todos);
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
 Hier findest du eine Übersicht der wichtigsten Befehle und häufige Fehlerquellen.
