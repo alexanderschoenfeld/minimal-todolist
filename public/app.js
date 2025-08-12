@@ -7,7 +7,7 @@
 // ---- 1. Nur Memory ----
 let todos = [];
 
-// //---- 2. Local Storage ----
+// //---- 2. Local Storage Functions ----
 // // Funktion zum Speichern im Local Storage
 // function saveTodosToLocalStorage(todos) {
 //   localStorage.setItem('todos', JSON.stringify(todos));
@@ -18,7 +18,9 @@ let todos = [];
 //   return todos ? JSON.parse(todos) : [];
 // }
 
-// //---- 3. API/Datei ----
+
+// //---- 3. API/Datei Functions----
+// // API-Endpunkt für die Todo-Liste
 // const API = "/api/todos";
 // async function fetchTodosFromApi() {
 //   const res = await fetch(API);
@@ -57,6 +59,7 @@ let todos = [];
 //   });
 //   fetchTodosFromApi();
 // }
+
 
 const listEl = document.querySelector("#list");
 const formEl = document.querySelector("#createForm");
@@ -100,52 +103,66 @@ formEl.addEventListener("submit", (e) => {
   if (!text) return;
   todos.push({ id: Date.now(), text, done: false });
   inputEl.value = "";
+
   // // Schritt 2: aktivieren für Local Storage
   // saveTodosToLocalStorage(todos); 
 
   // // Schritt 3: API-Aufruf für POST
   // addTodoApi(text);
+  
+  
   render(todos);
 });
 
 function toggleDone(id, done) {
   const todo = todos.find(t => t.id === id);
   if (todo) todo.done = done;
-  // //Schritt 2: aktivieren für Local Storage
-  // saveTodosToLocalStorage(todos);
+
+//   //Schritt 2: aktivieren für Local Storage
+//   saveTodosToLocalStorage(todos);
 
 // // Schritt 3: API-Aufruf für PATCH
 //   toggleDoneApi(id, done);
-//   render(todos);
+  
+  
+  render(todos);
 }
 
 function updateText(id, text) {
   const todo = todos.find(t => t.id === id);
   if (todo) todo.text = text;
+  
   // //Schritt 2: aktivieren für Local Storage
   // saveTodosToLocalStorage(todos);
 
-  // Schritt 3: API-Aufruf für PATCH
+  // //Schritt 3: API-Aufruf für PATCH
   // updateTodoApi(id, text);
-  // render(todos);
+  
+  
+  render(todos);
 }
 
 function delTodo(id) {
   todos = todos.filter(t => t.id !== id);
+
   // // Schritt 2: aktivieren für Local Storage
   // saveTodosToLocalStorage(todos); 
   
   // // Schritt 3: API-Aufruf für DELETE
   // delTodoApi(id);
-  // render(todos);
+
+
+  render(todos);
 }
 
-// Schritt 1: Nur Memory
-render(todos);
+
 
 // // Schritt 2: Local Storage aktivieren
 // todos = loadTodosFromLocalStorage();
-// render(todos);
 
 // // Schritt 3: API aktivieren
 // fetchTodosFromApi();
+
+
+// Schritt 1: Nur Memory
+render(todos);
