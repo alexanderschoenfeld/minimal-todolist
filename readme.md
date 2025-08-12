@@ -438,229 +438,32 @@ render(todos);
 
 ### Schritt 2: Local Storage aktivieren
 
-- Kommentiere die Funktionen und Aufrufe für Local Storage ein:
-  - `saveTodosToLocalStorage(todos)` nach jeder Änderung an `todos`
-  - `todos = loadTodosFromLocalStorage();` beim Laden der Seite
+- Suche im Code nach allen Kommentarzeilen, die mit `// Schritt 2:` beginnen (z.B. `// Schritt 2: aktivieren für Local Storage`).
+- Entferne die Kommentarzeichen (`//`) vor diesen Zeilen, um die Local Storage-Funktionalität zu aktivieren.
 - Jetzt werden die Todos im Browser gespeichert und bleiben nach einem Neuladen erhalten.
-
-**Code-Ausschnitt:**
-```js
-// Funktion zum Speichern
-function saveTodosToLocalStorage(todos) {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
-// Funktion zum Laden
-function loadTodosFromLocalStorage() {
-  const todos = localStorage.getItem('todos');
-  return todos ? JSON.parse(todos) : [];
-}
-// ...
-// todos = loadTodosFromLocalStorage();
-// render(todos);
-// ...
-// saveTodosToLocalStorage(todos); // nach jeder Änderung
-```
 
 ---
 
 ### Schritt 3: API/Datei aktivieren
 
-- Kommentiere die API-Funktionen und -Aufrufe ein:
-  - `fetchTodosFromApi()` zum Laden der Todos vom Server
-  - API-Aufrufe für Hinzufügen, Bearbeiten, Löschen, Status ändern
+- Suche im Code nach allen Kommentarzeilen, die mit `// Schritt 3:` beginnen (z.B. `// Schritt 3: aktivieren für API`).
+- Entferne die Kommentarzeichen (`//`) vor diesen Zeilen, um die API/Datei-Funktionalität zu aktivieren.
 - Jetzt werden die Todos im Backend (z.B. in einer Datei) gespeichert und sind für alle Nutzer verfügbar.
 
-**Code-Ausschnitt:**
-```js
-const API = "/api/todos";
-async function fetchTodosFromApi() {
-  const res = await fetch(API);
-  const data = await res.json();
-  todos = data;
-  render(todos);
-}
-// ...
-// fetchTodosFromApi(); // beim Laden der Seite
-// ...
-// API-Aufrufe für POST, PATCH, DELETE
-```
 
----
-
-**Didaktischer Tipp:**
-- Die Schüler können die Varianten direkt im Code erleben, indem sie die jeweiligen Zeilen aktivieren.
-- So wird klar, wie sich die Speicherung im Speicher, im Browser und im Backend unterscheidet.
-
-Die Navigation und die Installationsanleitung bleiben wie gehabt am Anfang der Readme erhalten.
-
----
-
-# Persistenz in Local Storage
-
-<p align="center">
-  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
-  <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
-</p>
-
-Hier lernst du, wie du die Aufgaben im Local Storage des Browsers speicherst.
-
-**Wo kommt der Code hin?**
-> Füge den folgenden Code in die Datei `public/app.js` ein – am besten ganz oben, bevor die Funktionen zum Rendern und Bearbeiten der Todos kommen.
-
-```js
-// Beispiel: Aufgaben im Local Storage speichern
-function saveTodosToLocalStorage(todos) {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
-
-function loadTodosFromLocalStorage() {
-  const todos = localStorage.getItem('todos');
-  return todos ? JSON.parse(todos) : [];
-}
-```
-
-**Wie werden die Funktionen verwendet?**
-
-1. **Todos beim Laden der Seite aus Local Storage holen:**
-   ```js
-   let todos = loadTodosFromLocalStorage();
-   render(todos);
-   ```
-   → Diesen Aufruf am Ende von `app.js` platzieren, damit die Aufgaben beim Start angezeigt werden.
-
-2. **Todos nach jeder Änderung speichern:**
-   Füge den Aufruf `saveTodosToLocalStorage(todos);` jeweils in die passende Funktion ein:
-
-   - **Hinzufügen:** In der Funktion
-     ```js
-     formEl.addEventListener("submit", async (e) => {
-       // ...
-       inputEl.value = "";
-       saveTodosToLocalStorage(todos); // <-- direkt nach dem Hinzufügen, vor render/fetchTodos
-       fetchTodos();
-     });
-     ```
-
-   - **Löschen:** In der Funktion
-     ```js
-     async function delTodo(id) {
-       // ...
-       saveTodosToLocalStorage(todos); // <-- direkt nach dem Entfernen, vor render/fetchTodos
-       fetchTodos();
-     }
-     ```
-
-   - **Bearbeiten:** In der Funktion
-     ```js
-     async function updateText(id, text) {
-       // ...
-       saveTodosToLocalStorage(todos); // <-- direkt nach der Änderung, vor render/fetchTodos
-       fetchTodos();
-     }
-     ```
-
-   - **Status ändern (abgehakt):** In der Funktion
-     ```js
-     async function toggleDone(id, done) {
-       // ...
-       saveTodosToLocalStorage(todos); // <-- direkt nach der Änderung, vor render/fetchTodos
-       fetchTodos();
-     }
-     ```
-
-> **Tipp:** Immer direkt nach der Änderung an der `todos`-Liste und vor dem erneuten Rendern speichern!
-
-So stellst du sicher, dass die Aufgaben immer im Local Storage gespeichert und beim nächsten Laden der Seite wieder angezeigt werden.
-
----
-
-# Persistenz in Datei
-
-<p align="center">
-  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
-  <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
-</p>
-
-Hier wird gezeigt, wie die Aufgaben serverseitig in einer Datei gespeichert werden (Punkt 7).
-
-```bash
-npm install fs-extra
-```
-
-Ergänzung in `server.js` (oben):
-
-```js
-const fse = require("fs-extra");
-const DB_FILE = "./todos.json";
-
-async function load() {
-  try { return await fse.readJson(DB_FILE); } catch { return []; }
-}
-async function save(arr) {
-  await fse.writeJson(DB_FILE, arr, { spaces: 2 });
-}
-
-(async () => {
-  todos = await load();
-  nextId = todos.reduce((m,t) => Math.max(m,t.id), 0) + 1;
-})();
-```
-
-Nach jedem Ändern/Löschen/Speichern:
-
-```js
-save(todos);
-```
-
----
-
-# Cheat-Sheet & Trouble Shooting
-
-<p align="center">
-  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
-  <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
-</p>
-
-Hier findest du eine Übersicht der wichtigsten Befehle und häufige Fehlerquellen.
-
-## Cheat-Sheet
-- `npm start` – Startet den Server
-- `node server.js` – Startet den Server manuell
-- `npm install <paket>` – Installiert ein Paket
-
+# -------------------------------------------------
 ## Trouble Shooting
 - **Fehler: Port belegt** – Prüfe, ob ein anderer Server läuft und beende ihn
 - **Fehler: Modul nicht gefunden** – Stelle sicher, dass alle Pakete installiert sind (`npm install`)
 - **Browser zeigt keine Seite** – Prüfe, ob der Server läuft und die richtige Adresse verwendet wird
 
----
-
-### 0.3 Windows Firewall-Hinweis bei `npm start`
-
+- **Windows Firewall-Hinweis nach** `npm start`
 Wenn Windows beim Starten von `npm start` meldet, dass die „Windows-Firewall einige Funktionen von Node.js in allen öffentlichen und privaten Netzwerken blockiert hat“ und fragt, ob Sie zulassen möchten, bedeutet das:
-
-* **Private Netzwerke** = Heim- oder Firmennetze, die Sie als vertrauenswürdig markiert haben (z. B. Ihr WLAN zu Hause).
-* **Öffentliche Netzwerke** = Unbekannte/vermutlich unsichere Netze (z. B. Café, Hotel, Flughafen-Hotspot).
+**Private Netzwerke** = Heim- oder Firmennetze, die Sie als vertrauenswürdig markiert haben (z. B. Ihr WLAN zu Hause).
+**Öffentliche Netzwerke** = Unbekannte/vermutlich unsichere Netze (z. B. Café, Hotel, Flughafen-Hotspot).
 
 **Warum passiert das?**
 Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht auf eingehende Verbindungen. Windows-Firewall erkennt dies als „Anwendung lauscht auf Verbindungen“ und fragt, ob es Verbindungen zulassen soll.
-
-**Empfehlung im Schulungskontext:**
-
-* Für rein lokale Entwicklung reicht es, **nur private Netzwerke zuzulassen**. Dann kann Ihr Server über `http://localhost:3000` im eigenen Rechner genutzt werden.
-* Öffentliche Netzwerke nur zulassen, wenn andere Geräte im gleichen Netz auf den Server zugreifen sollen (z. B. Test vom Smartphone im gleichen WLAN).
 
 ---
 
@@ -673,50 +476,9 @@ Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht
 5. **CSS:** Klassenschalter `.done` demonstrieren.
 6. **Fehlerfälle:** Leerer Text → `400 Bad Request` (mit DevTools Network zeigen).
 
----
 
-## 9) Nächste Schritte (Erweiterungen)
 
-* Sortierung (neueste oben), Tastatur-Enter-Handling, Doppelklick zum Editieren.
-* Lokale Persistenz per `localStorage` als Alternative.
-* Unit-Tests (Jest) und Linting (ESLint) hinzufügen.
-
----
-
-## 10) Kurz-Cheat‑Sheet (Commands)
-
-```bash
-# Projekt anlegen
-mkdir todo-minimal && cd todo-minimal
-npm init -y && npm i express && mkdir public
-
-# Starten
-npm start
-
----
-
-### 0.3 Windows Firewall-Hinweis bei `npm start`
-
-Wenn Windows beim Starten von `npm start` meldet, dass die „Windows-Firewall einige Funktionen von Node.js in allen öffentlichen und privaten Netzwerken blockiert hat“ und fragt, ob Sie zulassen möchten, bedeutet das:
-
-* **Private Netzwerke** = Heim- oder Firmennetze, die Sie als vertrauenswürdig markiert haben (z. B. Ihr WLAN zu Hause).
-* **Öffentliche Netzwerke** = Unbekannte/vermutlich unsichere Netze (z. B. Café, Hotel, Flughafen-Hotspot).
-
-**Warum passiert das?**
-Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht auf eingehende Verbindungen. Windows-Firewall erkennt dies als „Anwendung lauscht auf Verbindungen“ und fragt, ob es Verbindungen zulassen soll.
-
-**Empfehlung im Schulungskontext:**
-
-* Für rein lokale Entwicklung reicht es, **nur private Netzwerke zuzulassen**. Dann kann Ihr Server über `http://localhost:3000` im eigenen Rechner genutzt werden.
-* Öffentliche Netzwerke nur zulassen, wenn andere Geräte im gleichen Netz auf den Server zugreifen sollen (z. B. Test vom Smartphone im gleichen WLAN).
-
----
-
-# Prüfen
-node -v && npm -v
-```
-
-## 11) Laufenden Server anzeigen
+## 7) Laufenden Server anzeigen
 
 **CMD (Windows):**
 
@@ -730,7 +492,8 @@ tasklist | find "node"
 Get-Process -Name node
 ```
 
-**Linux/macOS:**
+**Linux/macOS**
+*(nur einsetzbar, wenn der Server auch tatsächlich in einer Linux Umgebung läuft!):*
 
 ```bash
 ps aux | grep node
