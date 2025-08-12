@@ -1,7 +1,7 @@
 # Minimal-Todo-App: Übersicht & Navigation
 
 <p align="center">
-  <a href="#readme">Readme</a> |
+  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -10,10 +10,10 @@
 
 ---
 
-# Readme
+# Minimal-Todo-App: Übersicht & Navigation
 
 <p align="center">
-  <a href="#readme">Readme</a> |
+  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -24,71 +24,10 @@ Willkommen zum Minimal-Todo-Projekt! Diese Anleitung ist für Anfänger gedacht 
 
 ---
 
-# Voraussetzungen
-
-## 0) Voraussetzungen & Installation
-
-### 0.1 Node.js + npm installieren
-
-> **Hinweis:** npm wird automatisch mit Node.js installiert.
-
-**Windows (empfohlen: LTS-Version)**
-
-1. Öffne [https://nodejs.org/](https://nodejs.org/) und lade die **LTS**-Version ("Recommended for Most Users") als **.msi** herunter.
-2. Installer starten → Standardoptionen beibehalten → Fertigstellen.
-3. **CMD/PowerShell** öffnen und prüfen:
-
-   ```bash
-   node -v
-   npm -v
-   ```
-
-**macOS**
-
-1. Öffne [https://nodejs.org/](https://nodejs.org/) und lade die **LTS**-Version als **.pkg** herunter.
-2. Installer ausführen → Standardoptionen.
-3. Prüfen im **Terminal**:
-
-   ```bash
-   node -v
-   npm -v
-   ```
-
-**Linux (Ubuntu/Debian, Einsteigerweg)**
-
-```bash
-sudo apt update
-sudo apt install -y nodejs npm
-node -v
-npm -v
-```
-
-> Alternative (aktuellere Versionen): NodeSource oder nvm verwenden (für Fortgeschrittene).
-
----
-
-### 0.2 Visual Studio Code (VS Code) installieren
-
-**Windows/macOS/Linux**
-
-1. Öffne [https://code.visualstudio.com/](https://code.visualstudio.com/) → **Download** für dein System.
-2. Installer ausführen → Standardoptionen.
-3. **Empfohlene Extensions:**
-
-   * **ESLint** (dbaeumer.vscode-eslint)
-   * **Prettier** (esbenp.prettier-vscode)
-
-**VS Code Terminal öffnen:**
-
-* Menü **View → Terminal** oder ``Ctrl+` `` (Backtick).
-
-
----
-
-# Projekt anlegen {#projekt-anlegen}
+# Projekt anlegen
 
 <p align="center">
-  <a href="#readme">Readme</a> |
+  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -332,10 +271,10 @@ npm start
 
 ---
 
-# Persistenz in Local Storage {#persistenz-in-local-storage}
+# Persistenz in Local Storage
 
 <p align="center">
-  <a href="#readme">Readme</a> |
+  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -360,10 +299,10 @@ function loadTodosFromLocalStorage() {
 
 ---
 
-# Persistenz in Datei {#persistenz-in-datei}
+# Persistenz in Datei
 
 <p align="center">
-  <a href="#readme">Readme</a> |
+  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -403,10 +342,10 @@ save(todos);
 
 ---
 
-# Cheat-Sheet & Trouble Shooting {#cheat-sheet-und-trouble-shooting}
+# Cheat-Sheet & Trouble Shooting
 
 <p align="center">
-  <a href="#readme">Readme</a> |
+  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
