@@ -3,6 +3,7 @@
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
@@ -17,6 +18,7 @@ In dieser Übung erstellen wir eine minimalistische Todo-App mit Node.js und Exp
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
@@ -48,6 +50,7 @@ npm -v
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
@@ -56,10 +59,9 @@ npm -v
 Hier wird Schritt für Schritt erklärt, wie du das Projekt bis Punkt 5 anlegst.
 
 1. Neues Verzeichnis erstellen
-2. Initialisiere npm
-3. Installiere Express
-4. Erstelle die Ordnerstruktur
-5. Starte den Server
+2. Installiere Express
+3. Erstelle die Ordnerstruktur
+4. Starte den Server
 
 ## 1) Neues Projekt anlegen
 
@@ -196,6 +198,16 @@ Minimaler Aufbau + sehr simples Styling.
 Plain Fetch + DOM, keine Frameworks.
 
 ```js
+// Beispiel: Aufgaben im Local Storage speichern
+function saveTodosToLocalStorage(todos) {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function loadTodosFromLocalStorage() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
+}
+
 const API = "/api/todos";
 const listEl = document.querySelector("#list");
 const formEl = document.querySelector("#createForm");
@@ -275,7 +287,8 @@ async function delTodo(id) {
   fetchTodos();
 }
 
-fetchTodos();
+let todos = loadTodosFromLocalStorage();
+render(todos);
 ```
 
 ## 5) Starten & Testen
@@ -290,11 +303,108 @@ npm start
 
 ---
 
+# Speicher-Varianten Schritt für Schritt
+
+<p align="center">
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
+
+## Ziel der Übung
+
+Du lernst, wie die Aufgaben (Todos) in drei Varianten gespeichert werden können:
+1. Nur im Arbeitsspeicher (Memory)
+2. Im Local Storage des Browsers
+3. Im Backend (Datei/Server, über die API)
+
+Alle Varianten sind im Code von `public/app.js` bereits vorbereitet und auskommentiert. Du aktivierst sie Schritt für Schritt, indem du die entsprechenden Zeilen einkommentierst.
+
+---
+
+### Schritt 1: Nur Memory (Standard)
+
+- Die Todos werden nur im Array `todos` gehalten.
+- Änderungen (Hinzufügen, Löschen, Bearbeiten, Status ändern) wirken sich nur auf das Array aus.
+- Nach jedem Schritt wird `render(todos)` aufgerufen.
+- Es wird nichts dauerhaft gespeichert – nach einem Neuladen der Seite sind alle Todos weg.
+
+**Code-Ausschnitt:**
+```js
+let todos = [];
+render(todos);
+```
+
+---
+
+### Schritt 2: Local Storage aktivieren
+
+- Kommentiere die Funktionen und Aufrufe für Local Storage ein:
+  - `saveTodosToLocalStorage(todos)` nach jeder Änderung an `todos`
+  - `todos = loadTodosFromLocalStorage();` beim Laden der Seite
+- Jetzt werden die Todos im Browser gespeichert und bleiben nach einem Neuladen erhalten.
+
+**Code-Ausschnitt:**
+```js
+// Funktion zum Speichern
+function saveTodosToLocalStorage(todos) {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+// Funktion zum Laden
+function loadTodosFromLocalStorage() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
+}
+// ...
+// todos = loadTodosFromLocalStorage();
+// render(todos);
+// ...
+// saveTodosToLocalStorage(todos); // nach jeder Änderung
+```
+
+---
+
+### Schritt 3: API/Datei aktivieren
+
+- Kommentiere die API-Funktionen und -Aufrufe ein:
+  - `fetchTodosFromApi()` zum Laden der Todos vom Server
+  - API-Aufrufe für Hinzufügen, Bearbeiten, Löschen, Status ändern
+- Jetzt werden die Todos im Backend (z.B. in einer Datei) gespeichert und sind für alle Nutzer verfügbar.
+
+**Code-Ausschnitt:**
+```js
+const API = "/api/todos";
+async function fetchTodosFromApi() {
+  const res = await fetch(API);
+  const data = await res.json();
+  todos = data;
+  render(todos);
+}
+// ...
+// fetchTodosFromApi(); // beim Laden der Seite
+// ...
+// API-Aufrufe für POST, PATCH, DELETE
+```
+
+---
+
+**Didaktischer Tipp:**
+- Die Schüler können die Varianten direkt im Code erleben, indem sie die jeweiligen Zeilen aktivieren.
+- So wird klar, wie sich die Speicherung im Speicher, im Browser und im Backend unterscheidet.
+
+Die Navigation und die Installationsanleitung bleiben wie gehabt am Anfang der Readme erhalten.
+
+---
+
 # Persistenz in Local Storage
 
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
@@ -302,7 +412,8 @@ npm start
 
 Hier lernst du, wie du die Aufgaben im Local Storage des Browsers speicherst.
 
-**Code-Ergänzungen für Local Storage:**
+**Wo kommt der Code hin?**
+> Füge den folgenden Code in die Datei `public/app.js` ein – am besten ganz oben, bevor die Funktionen zum Rendern und Bearbeiten der Todos kommen.
 
 ```js
 // Beispiel: Aufgaben im Local Storage speichern
@@ -316,6 +427,59 @@ function loadTodosFromLocalStorage() {
 }
 ```
 
+**Wie werden die Funktionen verwendet?**
+
+1. **Todos beim Laden der Seite aus Local Storage holen:**
+   ```js
+   let todos = loadTodosFromLocalStorage();
+   render(todos);
+   ```
+   → Diesen Aufruf am Ende von `app.js` platzieren, damit die Aufgaben beim Start angezeigt werden.
+
+2. **Todos nach jeder Änderung speichern:**
+   Füge den Aufruf `saveTodosToLocalStorage(todos);` jeweils in die passende Funktion ein:
+
+   - **Hinzufügen:** In der Funktion
+     ```js
+     formEl.addEventListener("submit", async (e) => {
+       // ...
+       inputEl.value = "";
+       saveTodosToLocalStorage(todos); // <-- direkt nach dem Hinzufügen, vor render/fetchTodos
+       fetchTodos();
+     });
+     ```
+
+   - **Löschen:** In der Funktion
+     ```js
+     async function delTodo(id) {
+       // ...
+       saveTodosToLocalStorage(todos); // <-- direkt nach dem Entfernen, vor render/fetchTodos
+       fetchTodos();
+     }
+     ```
+
+   - **Bearbeiten:** In der Funktion
+     ```js
+     async function updateText(id, text) {
+       // ...
+       saveTodosToLocalStorage(todos); // <-- direkt nach der Änderung, vor render/fetchTodos
+       fetchTodos();
+     }
+     ```
+
+   - **Status ändern (abgehakt):** In der Funktion
+     ```js
+     async function toggleDone(id, done) {
+       // ...
+       saveTodosToLocalStorage(todos); // <-- direkt nach der Änderung, vor render/fetchTodos
+       fetchTodos();
+     }
+     ```
+
+> **Tipp:** Immer direkt nach der Änderung an der `todos`-Liste und vor dem erneuten Rendern speichern!
+
+So stellst du sicher, dass die Aufgaben immer im Local Storage gespeichert und beim nächsten Laden der Seite wieder angezeigt werden.
+
 ---
 
 # Persistenz in Datei
@@ -323,6 +487,7 @@ function loadTodosFromLocalStorage() {
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
@@ -366,6 +531,7 @@ save(todos);
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
