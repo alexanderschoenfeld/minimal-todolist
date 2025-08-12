@@ -3,10 +3,8 @@
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#speicher-varianten-schritt-für-schritt">Speicher-Varianten</a> |
+  <a href="#trouble-shooting">Trouble Shooting</a>
 </p>
 
 In dieser Übung erstellen wir eine minimalistische Todo-App mit Node.js und Express. 
@@ -31,10 +29,8 @@ Aber zuerst bauen wir alles zusammen und laden die nötigen Libraries herunter.
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#speicher-varianten-schritt-für-schritt">Speicher-Varianten</a> |
+  <a href="#trouble-shooting">Trouble Shooting</a>
 </p>
 
 ## 1. Visual Studio Code installieren
@@ -63,10 +59,8 @@ npm -v
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#speicher-varianten-schritt-für-schritt">Speicher-Varianten</a> |
+  <a href="#trouble-shooting">Trouble Shooting</a>
 </p>
 
 Hier wird Schritt für Schritt erklärt, wie du das Projekt bis Punkt 5 anlegst.
@@ -417,10 +411,8 @@ npm start
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
-  <a href="#speicher-varianten-schritt-fur-schritt">Speicher-Varianten</a> |
-  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
-  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
-  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+  <a href="#speicher-varianten-schritt-für-schritt">Speicher-Varianten</a> |
+  <a href="#trouble-shooting">Trouble Shooting</a>
 </p>
 
 ## Ziel der Übung
@@ -464,8 +456,14 @@ render(todos);
 - Jetzt werden die Todos im Backend (z.B. in einer Datei) gespeichert und sind für alle Nutzer verfügbar.
 
 
-# -------------------------------------------------
-## Trouble Shooting
+# Trouble Shooting
+<p align="center">
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#speicher-varianten-schritt-für-schritt">Speicher-Varianten</a> |
+  <a href="#trouble-shooting">Trouble Shooting</a>
+</p>
+
 - **Fehler: Port belegt** – Prüfe, ob ein anderer Server läuft und beende ihn
 - **Fehler: Modul nicht gefunden** – Stelle sicher, dass alle Pakete installiert sind (`npm install`)
 - **Browser zeigt keine Seite** – Prüfe, ob der Server läuft und die richtige Adresse verwendet wird
@@ -480,18 +478,7 @@ Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht
 
 ---
 
-## 6) Didaktischer Ablauf (für Trainer\:innen)
-
-1. **Hello Express:** `server.js` anlegen, `console.log` zeigen, Startskript ausführen.
-2. **GET /api/todos:** Route erstellen, im Browser testen (JSON sichtbar).
-3. **POST /api/todos:** Formular sendet per Fetch → Erfolg im UI.
-4. **PATCH/DELETE:** Statuswechsel & Entfernen zeigen.
-5. **CSS:** Klassenschalter `.done` demonstrieren.
-6. **Fehlerfälle:** Leerer Text → `400 Bad Request` (mit DevTools Network zeigen).
-
-
-
-## 7) Laufenden Server anzeigen
+## 6) Laufenden Server anzeigen
 
 **CMD (Windows):**
 
@@ -519,3 +506,80 @@ lsof -i :3000
 ```
 
 Damit sieht man, ob Node auf Port 3000 läuft und welche Prozess-ID er hat.
+
+---
+
+## 7) Didaktischer Ablauf (für Trainer\:innen)
+
+1. **Hello Express:** `server.js` anlegen, `console.log` zeigen, Startskript ausführen.
+2. **GET /api/todos:** Route erstellen, im Browser testen (JSON sichtbar).
+3. **POST /api/todos:** Formular sendet per Fetch → Erfolg im UI.
+4. **PATCH/DELETE:** Statuswechsel & Entfernen zeigen.
+5. **CSS:** Klassenschalter `.done` demonstrieren.
+6. **Fehlerfälle:** Leerer Text → `400 Bad Request` (mit DevTools Network zeigen).
+
+## Didaktischer Ablauf – ausführlich erklärt
+
+### 7.1 Hello Express
+- Ziel: Die Teilnehmer:innen sehen, wie ein Node.js-Server mit Express gestartet wird.
+- Vorgehen:
+  - `server.js` öffnen und die Zeile mit `console.log` zeigen.
+  - Im Terminal mit `npm start` den Server starten.
+  - Die Erfolgsmeldung im Terminal demonstrieren.
+
+### 7.2 GET /api/todos
+- Ziel: Die Teilnehmer:innen sehen, wie das Backend Daten als JSON bereitstellt.
+- Vorgehen:
+  - Die Route `app.get("/api/todos", ...)` im Code zeigen.
+  - Im Browser `http://localhost:3000/api/todos` öffnen und das JSON betrachten.
+
+### 7.3 POST /api/todos
+- Ziel: Die Teilnehmer:innen lernen, wie neue Daten zum Backend gesendet werden.
+- Vorgehen:
+  - Im Frontend eine neue Todo hinzufügen und im DevTools-Netzwerk-Tab den POST-Request zeigen.
+  - **Tipp:** Man kann POST auch direkt von der Kommandozeile mit `curl` testen:
+    - **curl installieren:**
+      - Windows: [Download curl](https://curl.se/windows/)
+      - macOS/Linux: curl ist meist vorinstalliert
+    - **Beispiel-Befehl:**
+      ```sh
+      curl -X POST http://localhost:3000/api/todos -H "Content-Type: application/json" -d "{\"text\":\"Test\"}"
+      ```
+    - Das Ergebnis wird direkt im Terminal angezeigt.
+
+### 7.4 PATCH/DELETE
+- Ziel: Die Teilnehmer:innen sehen, wie bestehende Daten geändert oder gelöscht werden.
+- Vorgehen:
+  - Im UI ein Todo abhaken, bearbeiten oder löschen und die entsprechenden Requests im DevTools-Netzwerk-Tab zeigen.
+  - Optional: Auch mit curl testen:
+    - PATCH:
+      ```sh
+      curl -X PATCH http://localhost:3000/api/todos/1 -H "Content-Type: application/json" -d "{\"done\":true}"
+      ```
+    - DELETE:
+      ```sh
+      curl -X DELETE http://localhost:3000/api/todos/1
+      ```
+
+### 7.5 CSS: Klassenschalter `.done`
+- Ziel: Die Teilnehmer:innen verstehen, wie das Aussehen im Frontend gesteuert wird.
+- Vorgehen:
+  - Im UI zeigen, wie erledigte Todos durchgestrichen sind.
+  - Im Code die CSS-Regel `li.done .text { ... }` zeigen.
+  - **Erklärung:** CSS wirkt nur im Frontend und beeinflusst die Darstellung im Browser, nicht die Daten im Backend.
+
+### 7.6 Fehlerfälle: Leerer Text → 400 Bad Request
+- Ziel: Die Teilnehmer:innen sehen, wie das Backend Fehler behandelt.
+- Vorgehen:
+  - Im UI eine leere Todo absenden und im DevTools-Netzwerk-Tab den 400-Fehler zeigen.
+  - Im Backend-Code die entsprechende Fehlerbehandlung zeigen.
+
+---
+
+### Zusatz: Frontend-Only (Local Storage/Memory)
+- **Erklärung:** Wenn die Todos nur im Local Storage oder Memory gespeichert werden, arbeitet das Frontend unabhängig vom Backend. Das Backend wird entlastet, da keine Requests gesendet werden und alle Daten im Browser verarbeitet werden.
+- Vorteil: Schnelle Reaktion, weniger Serverlast, aber keine Synchronisation zwischen verschiedenen Geräten.
+
+
+
+
