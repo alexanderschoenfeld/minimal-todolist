@@ -1,22 +1,52 @@
-
 # Minimal-Todo-App: Übersicht & Navigation
 
 <p align="center">
-  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
   <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
 </p>
 
-Willkommen zum Minimal-Todo-Projekt! Diese Anleitung ist für Anfänger gedacht und führt dich Schritt für Schritt durch die wichtigsten Themen. Nutze die Navigation oben, um direkt zu den gewünschten Abschnitten zu springen.
+In dieser Übung erstellen wir eine minimalistische Todo-App mit Node.js und Express. Schritt für Schritt lernst du, wie du ein neues Projekt aufsetzt, die grundlegende Backend-Logik entwickelst und ein einfaches Frontend implementierst. Ziel ist es, Aufgaben zu erfassen, zu bearbeiten und zu verwalten – ideal für den Einstieg in die Webentwicklung mit JavaScript. 
+
+---
+
+# Voraussetzungen & Installation
+
+<p align="center">
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet--trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
+
+## 1. Visual Studio Code installieren
+
+- [Download VS Code](https://code.visualstudio.com/)
+- Standardoptionen beibehalten
+- Empfohlene Extensions: ESLint, Prettier
+
+## 2. Node.js + npm installieren
+
+- [Download Node.js (LTS)](https://nodejs.org/)
+- Installation ausführen
+- npm wird automatisch mitinstalliert
+
+**Versionen testen:**
+
+```bash
+node -v
+npm -v
+```
 
 ---
 
 # Projekt anlegen
 
 <p align="center">
-  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -263,7 +293,7 @@ npm start
 # Persistenz in Local Storage
 
 <p align="center">
-  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -291,7 +321,7 @@ function loadTodosFromLocalStorage() {
 # Persistenz in Datei
 
 <p align="center">
-  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
@@ -334,7 +364,7 @@ save(todos);
 # Cheat-Sheet & Trouble Shooting
 
 <p align="center">
-  <a href="#minimal-todo-app-%C3%BCbersicht--navigation">Readme</a> |
+  <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
   <a href="#projekt-anlegen">Projekt anlegen</a> |
   <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
   <a href="#persistenz-in-datei">Persistenz in Datei</a> |
