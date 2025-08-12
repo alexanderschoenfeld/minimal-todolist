@@ -1,8 +1,30 @@
-# Workshop: Minimal To‑Do App (Express + Vanilla JS)
+# Minimal-Todo-App: Übersicht & Navigation
 
-Ziel: Eine sehr einfache lokal laufende To‑Do-App mit **Express (Node.js)** als Backend und **Vanilla JavaScript** als Frontend. Minimales Styling, ideal für Einsteiger\:innen.
+<p align="center">
+  <a href="#readme">Readme</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
 
 ---
+
+# Readme
+
+<p align="center">
+  <a href="#readme">Readme</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
+
+Willkommen zum Minimal-Todo-Projekt! Diese Anleitung ist für Anfänger gedacht und führt dich Schritt für Schritt durch die wichtigsten Themen. Nutze die Navigation oben, um direkt zu den gewünschten Abschnitten zu springen.
+
+---
+
+# Voraussetzungen
 
 ## 0) Voraussetzungen & Installation
 
@@ -60,24 +82,26 @@ npm -v
 
 * Menü **View → Terminal** oder ``Ctrl+` `` (Backtick).
 
----
-
-### 0.3 Windows Firewall-Hinweis bei `npm start`
-
-Wenn Windows beim Starten von `npm start` meldet, dass die „Windows-Firewall einige Funktionen von Node.js in allen öffentlichen und privaten Netzwerken blockiert hat“ und fragt, ob Sie zulassen möchten, bedeutet das:
-
-* **Private Netzwerke** = Heim- oder Firmennetze, die Sie als vertrauenswürdig markiert haben (z. B. Ihr WLAN zu Hause).
-* **Öffentliche Netzwerke** = Unbekannte/vermutlich unsichere Netze (z. B. Café, Hotel, Flughafen-Hotspot).
-
-**Warum passiert das?**
-Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht auf eingehende Verbindungen. Windows-Firewall erkennt dies als „Anwendung lauscht auf Verbindungen“ und fragt, ob es Verbindungen zulassen soll.
-
-**Empfehlung im Schulungskontext:**
-
-* Für rein lokale Entwicklung reicht es, **nur private Netzwerke zuzulassen**. Dann kann Ihr Server über `http://localhost:3000` im eigenen Rechner genutzt werden.
-* Öffentliche Netzwerke nur zulassen, wenn andere Geräte im gleichen Netz auf den Server zugreifen sollen (z. B. Test vom Smartphone im gleichen WLAN).
 
 ---
+
+# Projekt anlegen {#projekt-anlegen}
+
+<p align="center">
+  <a href="#readme">Readme</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
+
+Hier wird Schritt für Schritt erklärt, wie du das Projekt bis Punkt 5 anlegst.
+
+1. Neues Verzeichnis erstellen
+2. Initialisiere npm
+3. Installiere Express
+4. Erstelle die Ordnerstruktur
+5. Starte den Server
 
 ## 1) Neues Projekt anlegen
 
@@ -116,8 +140,6 @@ In **package.json** Startskript ergänzen:
   }
 }
 ```
-
----
 
 ## 2) Backend (Express) – `server.js`
 
@@ -171,8 +193,6 @@ app.listen(PORT, () => {
 });
 ```
 
----
-
 ## 3) Frontend – `public/index.html`
 
 Minimaler Aufbau + sehr simples Styling.
@@ -212,8 +232,6 @@ Minimaler Aufbau + sehr simples Styling.
 </body>
 </html>
 ```
-
----
 
 ## 4) Frontend-Logik – `public/app.js`
 
@@ -302,8 +320,6 @@ async function delTodo(id) {
 fetchTodos();
 ```
 
----
-
 ## 5) Starten & Testen
 
 ```bash
@@ -316,18 +332,45 @@ npm start
 
 ---
 
-## 6) Didaktischer Ablauf (für Trainer\:innen)
+# Persistenz in Local Storage {#persistenz-in-local-storage}
 
-1. **Hello Express:** `server.js` anlegen, `console.log` zeigen, Startskript ausführen.
-2. **GET /api/todos:** Route erstellen, im Browser testen (JSON sichtbar).
-3. **POST /api/todos:** Formular sendet per Fetch → Erfolg im UI.
-4. **PATCH/DELETE:** Statuswechsel & Entfernen zeigen.
-5. **CSS:** Klassenschalter `.done` demonstrieren.
-6. **Fehlerfälle:** Leerer Text → `400 Bad Request` (mit DevTools Network zeigen).
+<p align="center">
+  <a href="#readme">Readme</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
+
+Hier lernst du, wie du die Aufgaben im Local Storage des Browsers speicherst.
+
+**Code-Ergänzungen für Local Storage:**
+
+```js
+// Beispiel: Aufgaben im Local Storage speichern
+function saveTodosToLocalStorage(todos) {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function loadTodosFromLocalStorage() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
+}
+```
 
 ---
 
-## 7) Optional: Persistenz in Datei (für Fortgeschrittene)
+# Persistenz in Datei {#persistenz-in-datei}
+
+<p align="center">
+  <a href="#readme">Readme</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
+
+Hier wird gezeigt, wie die Aufgaben serverseitig in einer Datei gespeichert werden (Punkt 7).
 
 ```bash
 npm install fs-extra
@@ -360,20 +403,55 @@ save(todos);
 
 ---
 
-## 8) Troubleshooting (häufige Fehler)
+# Cheat-Sheet & Trouble Shooting {#cheat-sheet-und-trouble-shooting}
 
-* **Port belegt (EADDRINUSE 3000):**
+<p align="center">
+  <a href="#readme">Readme</a> |
+  <a href="#projekt-anlegen">Projekt anlegen</a> |
+  <a href="#persistenz-in-local-storage">Persistenz in Local Storage</a> |
+  <a href="#persistenz-in-datei">Persistenz in Datei</a> |
+  <a href="#cheat-sheet-und-trouble-shooting">Cheat-Sheet & Trouble Shooting</a>
+</p>
 
-  * Andere App beenden oder Port ändern (z. B. `const PORT = 3001`).
-* **CORS-Fehler:**
+Hier findest du eine Übersicht der wichtigsten Befehle und häufige Fehlerquellen.
 
-  * Nicht nötig, wenn Frontend aus `express.static` kommt (gleiche Origin).
-* **"Cannot GET /":**
+## Cheat-Sheet
+- `npm start` – Startet den Server
+- `node server.js` – Startet den Server manuell
+- `npm install <paket>` – Installiert ein Paket
 
-  * Prüfe, ob `public/index.html` existiert und `app.use(express.static("public"))` gesetzt ist.
-* **Leere Liste:**
+## Trouble Shooting
+- **Fehler: Port belegt** – Prüfe, ob ein anderer Server läuft und beende ihn
+- **Fehler: Modul nicht gefunden** – Stelle sicher, dass alle Pakete installiert sind (`npm install`)
+- **Browser zeigt keine Seite** – Prüfe, ob der Server läuft und die richtige Adresse verwendet wird
 
-  * In DevTools (Network) prüfen, ob `GET /api/todos` 200 liefert.
+---
+
+### 0.3 Windows Firewall-Hinweis bei `npm start`
+
+Wenn Windows beim Starten von `npm start` meldet, dass die „Windows-Firewall einige Funktionen von Node.js in allen öffentlichen und privaten Netzwerken blockiert hat“ und fragt, ob Sie zulassen möchten, bedeutet das:
+
+* **Private Netzwerke** = Heim- oder Firmennetze, die Sie als vertrauenswürdig markiert haben (z. B. Ihr WLAN zu Hause).
+* **Öffentliche Netzwerke** = Unbekannte/vermutlich unsichere Netze (z. B. Café, Hotel, Flughafen-Hotspot).
+
+**Warum passiert das?**
+Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht auf eingehende Verbindungen. Windows-Firewall erkennt dies als „Anwendung lauscht auf Verbindungen“ und fragt, ob es Verbindungen zulassen soll.
+
+**Empfehlung im Schulungskontext:**
+
+* Für rein lokale Entwicklung reicht es, **nur private Netzwerke zuzulassen**. Dann kann Ihr Server über `http://localhost:3000` im eigenen Rechner genutzt werden.
+* Öffentliche Netzwerke nur zulassen, wenn andere Geräte im gleichen Netz auf den Server zugreifen sollen (z. B. Test vom Smartphone im gleichen WLAN).
+
+---
+
+## 6) Didaktischer Ablauf (für Trainer\:innen)
+
+1. **Hello Express:** `server.js` anlegen, `console.log` zeigen, Startskript ausführen.
+2. **GET /api/todos:** Route erstellen, im Browser testen (JSON sichtbar).
+3. **POST /api/todos:** Formular sendet per Fetch → Erfolg im UI.
+4. **PATCH/DELETE:** Statuswechsel & Entfernen zeigen.
+5. **CSS:** Klassenschalter `.done` demonstrieren.
+6. **Fehlerfälle:** Leerer Text → `400 Bad Request` (mit DevTools Network zeigen).
 
 ---
 
@@ -395,9 +473,29 @@ npm init -y && npm i express && mkdir public
 # Starten
 npm start
 
+---
+
+### 0.3 Windows Firewall-Hinweis bei `npm start`
+
+Wenn Windows beim Starten von `npm start` meldet, dass die „Windows-Firewall einige Funktionen von Node.js in allen öffentlichen und privaten Netzwerken blockiert hat“ und fragt, ob Sie zulassen möchten, bedeutet das:
+
+* **Private Netzwerke** = Heim- oder Firmennetze, die Sie als vertrauenswürdig markiert haben (z. B. Ihr WLAN zu Hause).
+* **Öffentliche Netzwerke** = Unbekannte/vermutlich unsichere Netze (z. B. Café, Hotel, Flughafen-Hotspot).
+
+**Warum passiert das?**
+Node.js startet Ihren Express‑Server auf einem Port (z. B. 3000) und lauscht auf eingehende Verbindungen. Windows-Firewall erkennt dies als „Anwendung lauscht auf Verbindungen“ und fragt, ob es Verbindungen zulassen soll.
+
+**Empfehlung im Schulungskontext:**
+
+* Für rein lokale Entwicklung reicht es, **nur private Netzwerke zuzulassen**. Dann kann Ihr Server über `http://localhost:3000` im eigenen Rechner genutzt werden.
+* Öffentliche Netzwerke nur zulassen, wenn andere Geräte im gleichen Netz auf den Server zugreifen sollen (z. B. Test vom Smartphone im gleichen WLAN).
+
+---
+
 # Prüfen
 node -v && npm -v
 ```
+
 ## 11) Laufenden Server anzeigen
 
 **CMD (Windows):**
