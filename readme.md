@@ -54,7 +54,7 @@ npm -v
 
 ---
 
-# Projekt anlegen
+# Projekt von Anfang an manuell anlegen *(wenn Du es nicht einfach schon geclonet hast)* 
 
 <p align="center">
   <a href="#voraussetzungen--installation">Voraussetzungen & Installation</a> |
@@ -70,18 +70,29 @@ Hier wird Schritt für Schritt erklärt, wie du das Projekt bis Punkt 5 anlegst.
 3. Erstelle die Ordnerstruktur
 4. Starte den Server
 
-## 1) Neues Projekt anlegen
+**Beachte:** *Wenn Du das Projekt nicht von Github geclont hast, dann starte so:*
+## 1) Neues Projekt anlegen:
+Mit den Befehlen unten kreierst Du: 
+1. Deinen Projektordner namens minimal-todolist
+2. springst in diesen Ordner hinein
+3. initialisierst Node.js - was die Dateien package.json und package-lock.json kreiert
+4. installierst die Bibliotheken express (Deiner Backend Server) und fs-extra (Hilfsbibliothek für das Dateimanagement)
+5. du kreierst die server.js Datei. Hier schreibst Du im Anschluss den Code für Deinen Server rein
+6. Du kreierst einen Ordner namens public und springst direkt danach hinein
+7. Du kreierst zwei Dateien namens index.html und app.js
 
 ```bash
-mkdir todo-minimal
-cd todo-minimal
+mkdir minimal-todolist
+cd minimal-todolist
 npm init -y
 npm install express fs-extra
-mkdir public
+type nul > server.js //kreiert die Datei server.js
+mkdir public & cd public
+type nul > index.html & type nul > app.js //kreiert zwei Dateien gleichzeitig
+
 ```
 
-Dateistruktur:
-
+So sollte Deine Dateistruktur jetzt aussehen:
 ```
 todo-minimal/
 ├─ package.json
@@ -91,7 +102,7 @@ todo-minimal/
    └─ app.js
 ```
 
-In **package.json** Startskript ergänzen:
+In **package.json** musst Du Startskript ergänzen:
 
 ```json
 {
@@ -100,7 +111,7 @@ In **package.json** Startskript ergänzen:
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js" //diese Zeile unter Scripts hinzufügen
   },
   "dependencies": {
     "express": "^4.19.2"
@@ -110,6 +121,7 @@ In **package.json** Startskript ergänzen:
 
 ## 2) Backend (Express) – `server.js`
 
+In die Datei **server.js** kopierst Du diesen Code:
 ```js
 // server.js
 const fse = require("fs-extra");
@@ -181,7 +193,8 @@ app.listen(PORT, () => {
 
 ## 3) Frontend – `public/index.html`
 
-Minimaler Aufbau + sehr simples Styling.
+Füge den HTML-Code in die Datei **index.html** ein.
+Dies ist eine sehr simple gestylte HTML Seite, über die Du Deine Todos einpflegen wirst.
 
 ```html
 <!doctype html>
@@ -221,7 +234,8 @@ Minimaler Aufbau + sehr simples Styling.
 
 ## 4) Frontend-Logik – `public/app.js`
 
-Plain Fetch + DOM, keine Frameworks.
+Füge diesen Code in Deine **app.js** ein.
+Diese Code enthält 3 verschiedene Programmierungen zur Veranschaulichung. Diese Varianten aktivieren wir Schritt-für-Schritt in dieser Übung: <a href="#speicher-varianten-schritt-für-schritt">Speicher-Varianten</a> weiter unten auf dieser Seite.
 
 ```js
 // Minimal-Todo-App: Speicher-Varianten
